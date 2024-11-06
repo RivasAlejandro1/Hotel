@@ -1,5 +1,5 @@
 {
-    "watch": ["src/**/*.mjs"],
-    "ext": "mjs",
+    "watch": ["src/**/*.js"],
+    "ext": "js",
     "exec": "npm run start"
 }

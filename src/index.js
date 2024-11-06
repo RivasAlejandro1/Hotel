@@ -1,4 +1,4 @@
-import server from "./server.mjs";
+import server from "./server.js";
 const PORT = 3000;
 
 
