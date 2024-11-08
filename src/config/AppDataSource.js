@@ -20,7 +20,7 @@ export const AppDataSource = new DataSource({
     database: DATABASE,
     synchronize: true,
     logging: true,
-    dropSchema: true,
+    //dropSchema: true,
     entities: [User, Credential, reservationEntity, habitacionEntity],
     subscribers: [],
     migrations: [],
