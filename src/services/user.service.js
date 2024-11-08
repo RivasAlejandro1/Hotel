@@ -6,10 +6,10 @@ export const getAllUserService = async ()=> {
     const allUser = await userReposository.find();
     return allUser;
 };
-/* export const getUserByIDService = async ()=> {
+
+export const getUserByIDService = async ()=> {
     const userFinded = await userReposository.findOneBy("id");
     return userFinded;
 };
- */
 
 
