@@ -1,6 +1,9 @@
 import { DataSource } from "typeorm"
 import "dotenv/config"
 import User from "../entities/user.entity.js";
+import Credential from "../entities/credential.entity.js";
+import reservationEntity from "../entities/reservation.entity.js";
+import habitacionEntity from "../entities/habitacion.entity.js";
 
 
 export const PASSWORD= process.env.PASSWORD;
@@ -17,7 +20,8 @@ export const AppDataSource = new DataSource({
     database: DATABASE,
     synchronize: true,
     logging: true,
-    entities: [User],
+    dropSchema: true,
+    entities: [User, Credential, reservationEntity, habitacionEntity],
     subscribers: [],
     migrations: [],
 })

@@ -2,33 +2,31 @@ import { EntitySchema } from "typeorm";
 
 
 export default new EntitySchema({
-    name: "User",
-    tableName: "users",
+    name: "Credential",
+    tableName: "credentials",
     columns: {
         id: {
             primary: true,
             type: "int",
             generated: true
         },
-        name: {
+        email: {
             type: "varchar",
             length: 50
         },
-        lastName: {
+        password: {
             type: "varchar",
-            length: 50
-        },
-        birthdate: {
-            type: "date"
-        },
-        cedula: {
-            type: "int",
-            unique: true
-        },
-        administrador: {
-            type: "boolean"
+            length: 100
         }
 
+    },
+    relations: {
+        users: {
+            target: "User",
+            type: "one-to-one",
+            joinTable: true,
+            cascade: true
+        }
     }
 })
 
