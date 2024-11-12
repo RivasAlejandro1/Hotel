@@ -14,16 +14,22 @@ userRouter.get("/:id", (req, res, next)=>{
 }); 
 userRouter.get("/:id", getUserByIdController); 
 
+
 /* userRouter.post("/", (req, res, next)=>{
+
+    //Modificar el body para que sea igual a lo que se pide
+    const {name, lastName, cedula, birthdate} = req.body;
+    req.body = {
+        name,
+        lastName,
+        cedula,
+        birthdate
+    };
 
     
     
-    
-    if(!validarNumero.test(req.params.id)) {
-        res.status(400).send("El id debe ser un numero");
-    } else{
-        next();
-    }
+
+
 });  */
 userRouter.post("/", createUserController); 
 

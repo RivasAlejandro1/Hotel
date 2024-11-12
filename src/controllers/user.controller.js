@@ -28,7 +28,7 @@ export const getUserByIdController =  async (req, res)=>{
 } 
 export const createUserController =  async (req, res)=>{
     try{
-        const userCreated =  await createUserService(req.params.body);
+        const userCreated =  await createUserService(req.body);
         res.status(200).send(userCreated);
     }
     catch(error){

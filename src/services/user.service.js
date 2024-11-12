@@ -1,4 +1,5 @@
 import { AppDataSource } from "../config/AppDataSource.js";
+import userEntity from "../entities/user.entity.js";
 import User from "../entities/user.entity.js";
 import infoUsers from "../utils/infoUsers.js";
 
@@ -15,7 +16,9 @@ export const getUserByIDService = async (id)=> {
 };
 
 export const createUserService = async (user)=> {
-    const userFinded = await userReposository.save(user);
+    const newUser = {...user, administrador: false}
+    console.log(newUser);
+    const userFinded = await userReposository.save(newUser);
     return userFinded;
 };
 
