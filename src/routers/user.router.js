@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createUserController, getAllUserController, getUserByIdController } from '../controllers/user.controller.js';
+import { createUserController, getAllUserController, getUserByIdController, modifeUserController } from '../controllers/user.controller.js';
 import validateUser from '../validations/createUserValidation.js';
 const userRouter = Router();
 
@@ -36,4 +36,5 @@ userRouter.post("/", (req, res, next)=>{
 });
 userRouter.post("/", createUserController); 
 
+userRouter.put("/:id", modifeUserController); 
 export default userRouter;

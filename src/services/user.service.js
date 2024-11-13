@@ -22,11 +22,15 @@ export const createUserService = async (user)=> {
     return userFinded;
 };
 
-export const modifeUserService = async (id, user)=> {
+export const modifeUserService = async (id, changesUser)=> {
+    const existUser = await userReposository.existsBy({id});
+    console.log("HOLA")
+    console.log("name type, ", typeof changesUser.name)
+    if(!existUser) throw new Error(`El usuario con el id ${id} no existe`);
     const userFinded = await userReposository
     .update(
         {id},
-        user
+        changesUser
     );
     return userFinded;
 };

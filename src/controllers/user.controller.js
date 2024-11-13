@@ -1,4 +1,4 @@
-import { createUserService, getAllUserService, getUserByIDService } from "../services/user.service.js";
+import { createUserService, getAllUserService, getUserByIDService, modifeUserService } from "../services/user.service.js";
 
 
 export const getAllUserController =  async (req, res)=>{
@@ -38,4 +38,17 @@ export const createUserController =  async (req, res)=>{
             });
     }
 
-} 
+};
+export const modifeUserController =  async (req, res)=>{
+    try{
+        const modifedUser =  await modifeUserService(req.params.id,req.body);
+        res.status(200).send(modifedUser);
+    }
+    catch(error){
+        res.status(404).send(
+            {
+                error: error.message
+            });
+    }
+
+};
