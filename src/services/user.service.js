@@ -1,5 +1,4 @@
 import { AppDataSource } from "../config/AppDataSource.js";
-import userEntity from "../entities/user.entity.js";
 import User from "../entities/user.entity.js";
 import infoUsers from "../utils/infoUsers.js";
 

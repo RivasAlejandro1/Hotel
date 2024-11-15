@@ -68,6 +68,6 @@ userRouter.put("/:id", (req, res, next) =>{
         res.status(400).send(error.message)
     }
     
-})
-userRouter.put("/:id", modifeUserController); 
+});
+userRouter.put("/:id", modifeUserController);
 export default userRouter;
