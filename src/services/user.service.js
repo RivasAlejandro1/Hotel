@@ -10,9 +10,11 @@ export const getAllUserService = async ()=> {
 };
 
 export const getUserByIDService = async (id)=> {
-    const userFinded = await userReposository.findOneBy({id});
+    const userFinded = await userReposository.findOneBy({id: id});
     return userFinded;
 };
+
+
 
 
 
