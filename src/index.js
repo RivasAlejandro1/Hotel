@@ -4,6 +4,7 @@ const PORT = 3000;
 import { AppDataSource } from "./config/AppDataSource.js";
 import { getAllUserService, userSeederService } from "./services/user.service.js";
 import { roomSeederService } from "./services/room.service.js";
+import { credentialSeederService } from "./services/credential.service.js";
 
 AppDataSource.initialize()
     .then(() => {
@@ -14,8 +15,9 @@ AppDataSource.initialize()
     .then(async () =>{
       const users = await getAllUserService();
       if(users.length == 0){
-        userSeederService();
+        credentialSeederService();
         roomSeederService();
+        //userSeederService();
       }
     })
     .catch((error) => console.log(error))

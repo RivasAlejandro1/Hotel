@@ -1,6 +1,8 @@
 import credentialEntity from "../entities/credential.entity.js";
 import { AppDataSource } from "../config/AppDataSource.js";
+import infoCrenditials from "../utils/infoCredenitials.js";
 const credentialRepository = AppDataSource.getRepository(credentialEntity);
+
 
 export const existCredentialWithThatEmailService = async (email)=> {
     const credentialFinded = await credentialRepository.existsBy({email: email});
@@ -27,3 +29,11 @@ export const findAccountByIdService = async(id) => {
         });
     return accountFinded;
 }
+
+export const credentialSeederService = async ()=> {
+    await Promise.all(
+       infoCrenditials.map( async(user) => {
+       await credentialRepository.save(user);
+   })) 
+   return "¡User seeder done!";
+};
