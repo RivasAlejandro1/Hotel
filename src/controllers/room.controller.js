@@ -1,4 +1,4 @@
-import { getAllRoomsService } from "../services/room.service.js";
+import { createRoomService, getAllRoomsService } from "../services/room.service.js";
 
 export const getAllRoomsController =  async (req, res) =>{
     try{
@@ -9,4 +9,17 @@ export const getAllRoomsController =  async (req, res) =>{
         res.status(404).send(error.message);
     }
 
+}
+
+export const createRoomController =  async (req, res)=>{
+    try{
+        const roomCreated =  await createRoomService(req.body);
+        res.status(201).send(roomCreated);
+    }
+    catch(error){
+        res.status(404).send(
+            {
+                error: error.message
+            });
+    }
 }

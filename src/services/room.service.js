@@ -10,6 +10,14 @@ export const getAllRoomsService =  async () =>{
     const allrooms = await roomRepository.find();
     return allrooms;
 }
+export const createRoomService = async (room)=> {
+    const existRoom = await roomRepository.existsBy({numero: room.numero});
+    if(existRoom) throw new Error(`Ya existe una habitación con el numero ${room.numero} `)
+    const roomFinded = await roomRepository.save(room);
+    return roomFinded;
+};
+
+
 
 export const roomSeederService = async ()=> {
     await Promise.all(
@@ -19,3 +27,4 @@ export const roomSeederService = async ()=> {
 
    return "¡Room Seeder done!";
 };
+
