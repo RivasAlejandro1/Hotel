@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import { findAccountByIdController, registerCredentialController } from '../controllers/credential.controller.js';
-/* import { validatePassword, validateEmail } from '../validations/registerCredentialValidation.js';
-import { validateUser } from '../validations/createUserValidation.js'; */
+import { validatePassword, validateEmail } from '../validations/registerCredentialValidation.js';
+import { validateUser } from '../validations/createUserValidation.js';
 const credentialRouter = Router();
 
-/* credentialRouter.post("/register", (req, res, next) =>{
+credentialRouter.post("/register", (req, res, next) =>{
     try{
         const { confirmPassword, password, email, name, lastName, birthdate, cedula} = req.body;
         validateEmail(email);
@@ -25,7 +25,7 @@ const credentialRouter = Router();
     catch(error){
         res.status(400).send(error.message);
     }
-}); */
+});
 credentialRouter.post("/register", registerCredentialController);
 
 credentialRouter.get("/account/:id", findAccountByIdController);
