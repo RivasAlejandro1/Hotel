@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { createUserController, getAllUserController, getUserByIdController, modifeUserController } from '../controllers/user.controller.js';
-import {validateUser, validateName, validateBirthdate,  validateCedula} from '../validations/createUserValidation.js';
+import { /* createUserController, */ getAllUserController, getUserByIdController, modifeUserController } from '../controllers/user.controller.js';
+import {/* validateUser, */ validateName, validateBirthdate,  validateCedula} from '../validations/createUserValidation.js';
 const userRouter = Router();
 
 userRouter.get("/", getAllUserController);
@@ -16,25 +16,7 @@ userRouter.get("/:id", (req, res, next)=>{
 userRouter.get("/:id", getUserByIdController); 
 
 
-userRouter.post("/", (req, res, next)=>{
-    
-    const { name, lastName, birthdate, cedula} = req.body; 
-    try{
-        validateUser(name, lastName, birthdate, cedula);
-        req.body = {
-            name,
-            lastName,
-            cedula,
-            birthdate: new Date(birthdate)
-        };
-        next();
-    }
-    catch(error){
-        res.status(400).send(error.message);
-    }
-    
-});
-userRouter.post("/", createUserController); 
+
 
 userRouter.put("/:id", (req, res, next) =>{
     const { name, lastName, birthdate, cedula} = req.body; 
@@ -70,4 +52,27 @@ userRouter.put("/:id", (req, res, next) =>{
     
 });
 userRouter.put("/:id", modifeUserController);
+
+/* userRouter.post("/", (req, res, next)=>{
+    
+    const { name, lastName, birthdate, cedula} = req.body; 
+    try{
+        validateUser(name, lastName, birthdate, cedula);
+        req.body = {
+            name,
+            lastName,
+            cedula,
+            birthdate: new Date(birthdate)
+        };
+        next();
+    }
+    catch(error){
+        res.status(400).send(error.message);
+    }
+    
+});
+userRouter.post("/", createUserController); */ 
+
+
+
 export default userRouter;

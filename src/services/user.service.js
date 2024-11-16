@@ -14,12 +14,7 @@ export const getUserByIDService = async (id)=> {
     return userFinded;
 };
 
-export const createUserService = async (user)=> {
-    const newUser = {...user, administrador: false}
-    console.log(newUser);
-    const userFinded = await userReposository.save(newUser);
-    return userFinded;
-};
+
 
 export const modifeUserService = async (id, changesUser)=> {
     const existUser = await userReposository.existsBy({id});
@@ -48,3 +43,10 @@ export const userSeederService = async ()=> {
 };
 
 
+/* //? No se esta usando
+export const createUserService = async (user)=> {
+    const newUser = {...user, administrador: false}
+    console.log(newUser);
+    const userFinded = await userReposository.save(newUser);
+    return userFinded;
+}; */
