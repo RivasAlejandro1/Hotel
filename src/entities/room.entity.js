@@ -14,7 +14,7 @@ export default new EntitySchema({
             type: "int",
             unique: true
         },
-        Tipo: {
+        tipo: {
             type: "varchar"
         }
 

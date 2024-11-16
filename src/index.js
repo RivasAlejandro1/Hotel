@@ -3,6 +3,7 @@ import "reflect-metadata";
 const PORT = 3000;
 import { AppDataSource } from "./config/AppDataSource.js";
 import { getAllUserService, userSeederService } from "./services/user.service.js";
+import { roomSeederService } from "./services/room.service.js";
 
 AppDataSource.initialize()
     .then(() => {
@@ -14,6 +15,7 @@ AppDataSource.initialize()
       const users = await getAllUserService();
       if(users.length == 0){
         userSeederService();
+        roomSeederService();
       }
     })
     .catch((error) => console.log(error))
