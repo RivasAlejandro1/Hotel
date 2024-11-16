@@ -20,8 +20,8 @@ export default new EntitySchema({
         }
     },
     relations:{
-        habitaciones:{
-            target: "Habitacion",
+        rooms:{
+            target: "Room",
             type: "many-to-one",
             
         },

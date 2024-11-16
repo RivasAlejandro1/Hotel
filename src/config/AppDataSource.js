@@ -3,7 +3,7 @@ import "dotenv/config"
 import User from "../entities/user.entity.js";
 import Credential from "../entities/credential.entity.js";
 import reservationEntity from "../entities/reservation.entity.js";
-import habitacionEntity from "../entities/habitacion.entity.js";
+import roomEntity from "../entities/room.entity.js";
 
 
 export const PASSWORD= process.env.PASSWORD;
@@ -21,7 +21,7 @@ export const AppDataSource = new DataSource({
     synchronize: true,
     logging: true,
     //dropSchema: true,
-    entities: [User, Credential, reservationEntity, habitacionEntity],
+    entities: [User, Credential, reservationEntity, roomEntity],
     subscribers: [],
     migrations: [],
 })
