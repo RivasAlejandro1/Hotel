@@ -21,9 +21,10 @@ export default new EntitySchema({
 
     },
     relations: {
-        users: {
-            target: "User",
+        user: {
             type: "one-to-one",
+            target: "User",
+            joinColumn: true,
             joinTable: true,
             cascade: true
         }

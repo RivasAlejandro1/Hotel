@@ -4,7 +4,17 @@ const credentialRepository = AppDataSource.getRepository(credentialEntity);
 
 
 export const registerCredentialService = async (infoCredential) =>{
-    const result = await credentialRepository.save(infoCredential);
-    console.log(result);
+    await credentialRepository.save(infoCredential);
     return "Las Credenciales han sido creadas";
+}
+
+//? No es necesaria, por los momentos
+export const findAccountByIdService = async(id) => {
+    const accountFinded = await credentialRepository.findOne({
+            relations: ["user"],
+            where:{
+                id
+            }
+        });
+    return accountFinded;
 }
