@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getAllReservationsController } from "../controllers/reservation.controller.js";
+import { getAllRoomsController } from "../controllers/room.controller.js";
 
-const reservationRouter = Router();
-reservationRouter.get("/", getAllReservationsController);
+const roomRouter = Router();
+roomRouter.get("/", getAllRoomsController);
 
-export default reservationRouter;
+export default roomRouter;
