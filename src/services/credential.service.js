@@ -1,7 +1,26 @@
 import credentialEntity from "../entities/credential.entity.js";
 import { AppDataSource } from "../config/AppDataSource.js";
+import bcrypt from 'bcrypt';
 import infoCrenditials from "../utils/infoCredenitials.js";
 const credentialRepository = AppDataSource.getRepository(credentialEntity);
+
+
+export const loginCredentialService = async (email, password) =>{
+    const ErrorInvalidCredentials = ()=>{
+        throw new Error(`El email o las contraseñas son invalidas`);
+    }
+    
+    const existEmail = await credentialRepository.findOne({
+        where: {
+            email,
+            password
+        }
+
+    })
+
+    if(!existEmail) ErrorInvalidCredentials();
+    return true;
+}
 
 
 export const existCredentialWithThatEmailService = async (email)=> {
@@ -14,8 +33,10 @@ export const existCredentialWithThatEmailService = async (email)=> {
 export const registerCredentialService = async (infoCredential) =>{
     const existEmail = await existCredentialWithThatEmailService(infoCredential.email);
     if(existEmail) throw new Error("El email ya esta en uso");
+    const passwordHashed =  await bcrypt.hash(infoCredential.password, 10);
+    if(!passwordHashed) throw new Error("La contraseña no puede ser hasheada");
 
-    await credentialRepository.save(infoCredential);
+    await credentialRepository.save({...infoCredential, password: passwordHashed});
     return "Las Credenciales han sido creadas";
 }
 
@@ -30,10 +51,11 @@ export const findAccountByIdService = async(id) => {
     return accountFinded;
 }
 
+
 export const credentialSeederService = async ()=> {
     await Promise.all(
        infoCrenditials.map( async(user) => {
-       await credentialRepository.save(user);
+       await registerCredentialService(user);
    })) 
    return "¡User seeder done!";
 };
