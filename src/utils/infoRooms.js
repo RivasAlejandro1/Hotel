@@ -1,13 +1,13 @@
 const infoRooms = [
-    { numero: 1, tipo: 'single' },
-    { numero: 2, tipo: 'double' },
-    { numero: 3, tipo: 'triple' },
-    { numero: 4, tipo: 'single' },
-    { numero: 5, tipo: 'double' },
-    { numero: 6, tipo: 'triple' },
-    { numero: 7, tipo: 'single' },
-    { numero: 8, tipo: 'double' },
-    { numero: 9, tipo: 'triple' },
-    { numero: 10, tipo: 'single' }
+    { numero: 1, tipo: 'single', precio: 99.99 },
+    { numero: 2, tipo: 'double', precio: 99.99 },
+    { numero: 3, tipo: 'triple', precio: 99.99 },
+    { numero: 4, tipo: 'single', precio: 99.99 },
+    { numero: 5, tipo: 'double', precio: 99.99 },
+    { numero: 6, tipo: 'triple', precio: 99.99 },
+    { numero: 7, tipo: 'single', precio: 99.99 },
+    { numero: 8, tipo: 'double', precio: 99.99 },
+    { numero: 9, tipo: 'triple', precio: 99.99 },
+    { numero: 10, tipo: 'singleeee', precio: 99.999}
 ];
 export default infoRooms; 
