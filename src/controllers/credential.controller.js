@@ -1,4 +1,4 @@
-import { findAccountByIdService, registerCredentialService } from "../services/credential.service.js";
+import { findAccountByIdService, loginCredentialService, registerCredentialService } from "../services/credential.service.js";
 
 
 export const registerCredentialController =  async (req, res)=>{
@@ -26,6 +26,16 @@ export const registerCredentialController =  async (req, res)=>{
 
 }
 
+export const loginCredentialController = async (req, res) =>{
+    try{
+        const {password, email} = req.body;
+        const logginMessage =  await loginCredentialService(email, password);
+        res.status(200).send(logginMessage)
+    }
+    catch(error){
+        res.status(404).send(error.message)
+    }
+} 
 
 
 export const findAccountByIdController = async (req, res)=>{

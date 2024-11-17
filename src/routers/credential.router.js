@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { findAccountByIdController, registerCredentialController } from '../controllers/credential.controller.js';
+import { findAccountByIdController, loginCredentialController, registerCredentialController } from '../controllers/credential.controller.js';
 import { validatePassword, validateEmail } from '../validations/registerCredentialValidation.js';
 import { validateUser } from '../validations/createUserValidation.js';
 const credentialRouter = Router();
@@ -27,6 +27,8 @@ credentialRouter.post("/register", (req, res, next) =>{
     }
 });
 credentialRouter.post("/register", registerCredentialController);
+
+credentialRouter.post("/login", loginCredentialController);
 
 credentialRouter.get("/account/:id", findAccountByIdController);
 //credentialRouter.post("/", loginCredentialController);

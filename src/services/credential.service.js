@@ -10,15 +10,16 @@ export const loginCredentialService = async (email, password) =>{
         throw new Error(`El email o las contraseñas son invalidas`);
     }
     
-    const existEmail = await credentialRepository.findOne({
+    const credentialFinded = await credentialRepository.findOne({
         where: {
-            email,
-            password
+            email
         }
 
     })
-
-    if(!existEmail) ErrorInvalidCredentials();
+    
+    if(!credentialFinded) ErrorInvalidCredentials();
+    const validPassword = await bcrypt.compare(password, credentialFinded.password);
+    if(!validPassword) ErrorInvalidCredentials();
     return true;
 }
 
