@@ -8,6 +8,6 @@ const infoRooms = [
     { numero: 7, tipo: 'single', precio: 99.99 },
     { numero: 8, tipo: 'double', precio: 99.99 },
     { numero: 9, tipo: 'triple', precio: 99.99 },
-    { numero: 10, tipo: 'singleeee', precio: 99.999}
+    { numero: 10, tipo: 'single', precio: 99.99}
 ];
 export default infoRooms; 

@@ -1,5 +1,6 @@
 const onlyNumbers = /^\d+$/;
 const numberLengthValidation = /^\d{1,3}$/;
+const itsHasTwoDecimals = /^\d+(\.\d{1,2})?$/;
 const types = [
     "single",
     "double",
@@ -15,4 +16,9 @@ export const validateRoomNumber = (number) =>{
 export const validateRoomType = (type) =>{
     const ItisAValidType = types.includes(type);
     if(!ItisAValidType) throw new Error("El tipo de la habitación no es un tipo valido")
+}
+
+export const validatePrice = (price) =>{
+    if(!itsHasTwoDecimals.test(price)) throw new Error("El precio debe ser un numero que tenga dos decimales");
+    
 }
