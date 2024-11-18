@@ -9,23 +9,23 @@ export default new EntitySchema({
             type: "int",
             generated: true
         },
-        fechaDeEntrada: {
+        entryDate: {
             type: "date"
         },
-        fechaDeSalida: {
+        departureDate: {
             type: "date"
         },
-        cancelado: {
+        paid: {
             type: "boolean"
         }
     },
     relations:{
-        rooms:{
+        room:{
             target: "Room",
             type: "many-to-one",
             
         },
-        users: {
+        user: {
             target: "User",
             type: "many-to-one"
         }
