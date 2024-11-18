@@ -4,6 +4,7 @@ import { validatePassword, validateEmail } from '../validations/registerCredenti
 import { validateUser } from '../validations/createUserValidation.js';
 const credentialRouter = Router();
 
+//middleware
 credentialRouter.post("/register", (req, res, next) =>{
     try{
         const { confirmPassword, password, email, name, lastName, birthdate, cedula} = req.body;
@@ -31,6 +32,5 @@ credentialRouter.post("/register", registerCredentialController);
 credentialRouter.post("/login", loginCredentialController);
 
 credentialRouter.get("/account/:id", findAccountByIdController);
-//credentialRouter.post("/", loginCredentialController);
 //credentialRouter.put("/", changeCredentialController);
 export default credentialRouter;

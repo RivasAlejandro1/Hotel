@@ -29,8 +29,12 @@ export const registerCredentialController =  async (req, res)=>{
 export const loginCredentialController = async (req, res) =>{
     try{
         const {password, email} = req.body;
-        const logginMessage =  await loginCredentialService(email, password);
-        res.status(200).send(logginMessage)
+        const accessToken =  await loginCredentialService(email, password);
+        res.header("authorization", accessToken).json({
+            message: "Usuario autenticado",
+            token: accessToken
+        })
+        //res.status(200).send();
     }
     catch(error){
         res.status(404).send(error.message)
