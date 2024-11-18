@@ -3,8 +3,9 @@ import "reflect-metadata";
 const PORT = 3000;
 import { AppDataSource } from "./config/AppDataSource.js";
 import { getAllUserService, userSeederService } from "./services/user.service.js";
-import { roomSeederService } from "./services/room.service.js";
+import { getAllRoomsService, roomSeederService } from "./services/room.service.js";
 import { credentialSeederService } from "./services/credential.service.js";
+import { reservationSeederService } from "./services/reservation.service.js";
 
 AppDataSource.initialize()
     .then(() => {
@@ -15,9 +16,11 @@ AppDataSource.initialize()
     .then(async () =>{
       const users = await getAllUserService();
       if(users.length == 0){
-        credentialSeederService();
-        roomSeederService();
-        //userSeederService();
+        await credentialSeederService();
+        await roomSeederService();
+        const users = await getAllUserService();
+        const rooms = await getAllRoomsService();
+        reservationSeederService(users, rooms);
       }
     })
     .catch((error) => console.log(error))
