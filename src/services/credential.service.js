@@ -56,5 +56,5 @@ export const credentialSeederService = async ()=> {
        infoCrenditials.map( async(user) => {
        await registerCredentialService(user);
    })) 
-   return "¡User seeder done!";
+   console.log("¡User seeder done!");
 };

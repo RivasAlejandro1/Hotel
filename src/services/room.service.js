@@ -17,6 +17,13 @@ export const createRoomService = async (room)=> {
     return roomFinded;
 };
 
+/* export const searchSpecificRoomsService = async(roomInfo) =>{
+    
+    const allRoomsFinded = await roomRepository.find({
+        where: roomInfo
+    })
+} */
+
 
 
 export const roomSeederService = async ()=> {
@@ -25,6 +32,6 @@ export const roomSeederService = async ()=> {
        await roomRepository.save(room);
    })) 
 
-   return "¡Room Seeder done!";
+   console.log("¡Room Seeder done!");
 };
 
