@@ -23,10 +23,8 @@ export const searchAvailableReservartionService =  async(searchEntryDate, search
     const searchE = new Date(searchEntryDate);
     const searchD = new Date(searchDepartuceDate);
     const today= new Date();
-    console.log("today:", today);
-    
     const allReservations = await reservationRepository.find();
-    let allRooms = await roomRepository.find(infoSearch);
+    let allRooms = await roomRepository.find();
     const removeRoom = (id) =>{
         allRooms = allRooms.filter(room => room.id != id);
     }
@@ -69,6 +67,9 @@ export const searchAvailableReservartionService =  async(searchEntryDate, search
             }
 
     }
+    console.log("allRooms:", allRooms);
+
+    return allRooms; 
 
 }
 
