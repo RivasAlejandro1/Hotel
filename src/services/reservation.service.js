@@ -31,6 +31,9 @@ export const searchAvailableReservartionService =  async(searchEntryDate, search
     const removeRoom = (id) =>{
         allRooms = allRooms.filter(room => room.id != id);
     }
+
+    
+    //* filter inavailable reservation
     for(const reservation of allReservations){
             const {entryDate, departureDate, room} = reservation;
             

@@ -9,6 +9,7 @@ import { reservationSeederService } from "./services/reservation.service.js";
 
 AppDataSource.initialize()
     .then(() => {
+      //! Es el comienzo del server
       server.listen(PORT, () => {
         console.log(`Example app listening on PORT ${PORT}`)
       })
