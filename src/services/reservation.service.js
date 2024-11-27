@@ -1,4 +1,5 @@
 import { compare } from "bcrypt";
+import { Equal } from "typeorm"
 import { AppDataSource } from "../config/AppDataSource.js";
 import reservationEntity from "../entities/reservation.entity.js";
 import infoReservations from "../utils/infoReservations.js";
@@ -17,17 +18,32 @@ export const getAllReservationsService =  async () =>{
 
 
 
-export const searchAvailableReservartionService =  async(searchEntryDate, searchDepartuceDate) =>{
+export const searchAvailableReservartionService =  async(searchEntryDate, searchDepartuceDate,type) =>{
     
+    const objectRoom = {};
+
+    console.log("type:", type)
+    console.log("objectRoom:", objectRoom)
+    if(type) objectRoom.tipo = type;
+    console.log("objectRoom.tipo:", objectRoom.tipo)
     
+
     const searchE = new Date(searchEntryDate);
     const searchD = new Date(searchDepartuceDate);
     const allReservations = await reservationRepository.find({
+        
         relations:{
             room: true
-        }
+        },
+        where:{
+            room:{
+                tipo:Equal(type), 
+            }
+        } ,
     });
-    let allRooms = await roomRepository.find();
+    let allRooms = await roomRepository.find({
+        where:objectRoom
+    });
     const removeRoom = (id) =>{
         allRooms = allRooms.filter(room => room.id != id);
     }

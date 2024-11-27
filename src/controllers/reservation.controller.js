@@ -13,8 +13,8 @@ export const getAllReservationsController =  async (req, res) =>{
 
 export const searchAvailableReservartionController =  async (req, res) =>{
     try{
-        const {entryDate, departureDate } = req.body;
-        const allReservation = await searchAvailableReservartionService(entryDate, departureDate);
+        const {entryDate, departureDate, type } = req.body;
+        const allReservation = await searchAvailableReservartionService(entryDate, departureDate, type);
         res.status(200).send(allReservation);
     }
     catch(error){
