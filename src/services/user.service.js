@@ -16,19 +16,31 @@ export const getUserByIDService = async (id)=> {
 
 
 
+export const modifeUserRolService = async(id/* , rol */) =>{
+    const userFinded = await userReposository.findOneBy({id});
+    if(!userFinded) throw new Error(`El usuario con el id ${id} no existe`);
+    /* const result = await userReposository.update(
+        {id},
+        {rol}
+    ); */
 
+    const result = await userReposository.update(
+        {id},
+        {administrador: !userFinded.administrador}
+    );
+    
+    return result;
+}
 
 export const modifeUserService = async (id, changesUser)=> {
     const existUser = await userReposository.existsBy({id});
-    console.log("HOLA")
-    console.log("name type, ", typeof changesUser.name)
     if(!existUser) throw new Error(`El usuario con el id ${id} no existe`);
-    const userFinded = await userReposository
+    const result = await userReposository
     .update(
         {id},
         changesUser
     );
-    return userFinded;
+    return result;
 };
 
 

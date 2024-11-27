@@ -1,9 +1,11 @@
 import { Router } from 'express';
-import { /* createUserController, */ getAllUserController, getUserByIdController, modifeUserController } from '../controllers/user.controller.js';
+import { /* createUserController, */ getAllUserController, getUserByIdController, modifeRolUserController, modifeUserController } from '../controllers/user.controller.js';
 import {/* validateUser, */ validateName, validateBirthdate,  validateCedula} from '../validations/createUserValidation.js';
 const userRouter = Router();
 
 userRouter.get("/", getAllUserController);
+
+userRouter.put("/rol/:id", modifeRolUserController);
 userRouter.get("/:id", (req, res, next)=>{
     const validarNumero = /^\d+$/ 
     

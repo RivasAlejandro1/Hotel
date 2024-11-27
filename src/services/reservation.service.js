@@ -16,8 +16,6 @@ export const getAllReservationsService =  async () =>{
 }
 
 
-
-
 export const searchAvailableReservartionService =  async(searchEntryDate, searchDepartuceDate,type) =>{
     
     const objectRoom = {};
