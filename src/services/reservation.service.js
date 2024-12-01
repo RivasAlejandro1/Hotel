@@ -1,5 +1,4 @@
-import { compare } from "bcrypt";
-import { Brackets, Equal, LessThan, LessThanOrEqual, MoreThanOrEqual } from "typeorm"
+import { Brackets, Equal} from "typeorm"
 import { AppDataSource } from "../config/AppDataSource.js";
 import reservationEntity from "../entities/reservation.entity.js";
 import infoReservations from "../utils/infoReservations.js";
@@ -183,4 +182,62 @@ export const makeAReservationService = async ({userId, roomId, entryDate, depart
     await reservationRepository.save(newReservation);
     
     return "La Reservación se ha realizado con exito";
+}
+
+//* Admin
+export const getAllInfoRoomsService = async({ entryDate, departureDate}) => {
+ 
+    const findedReservations= await reservationRepository
+    .createQueryBuilder("reservation")
+    .leftJoinAndSelect("reservation.room", "room")
+    .getMany();
+
+    const allRooms = await roomRepository.find();
+
+    let allAvailableRooms = [...allRooms];
+    const allUnavailableRooms = [];
+
+    
+    
+   
+    for(const reservation of findedReservations){
+      console.log(reservation);
+        if(existeChoqueConElIntervalo(entryDate, departureDate, reservation.entryDate, reservation.departureDate)){
+            allUnavailableRooms.push(reservation.room);
+            allAvailableRooms = allAvailableRooms.filter((room) => room.id != reservation.room?.id);
+        }
+    }
+
+    return  [
+        allAvailableRooms,
+        allUnavailableRooms
+    ]
+}
+
+
+
+
+
+
+
+
+
+const existeChoqueConElIntervalo = (entryDate, departureDate, reservationEntryDate, reservationDepartureDate) =>{
+
+    const searchE = new Date(entryDate);
+    const searchD = new Date(departureDate);
+
+    const Entry = new Date(reservationEntryDate);
+    const Departuce = new Date(reservationDepartureDate);
+    //* Comparar que no inicien o acaben en la misma fecha
+    if(compareAsc(Entry, searchE) == 0 || compareAsc(Departuce, searchD) == 0) return true;
+
+    //* Comparar que el inicio o el final no esten en el intervalo de tiempo de otras fechas
+    if(compareAsc(Entry, searchE) == 1 && compareAsc(Entry, searchD) == -1) return true;
+    if(compareAsc(Departuce, searchE) == 1 && compareAsc(Departuce, searchD) == -1) return true;
+
+    //* Comparar que otro intervalo no esten dentro del intervalo que estamos buscando
+    if(compareAsc(Entry, searchE) == -1 && compareAsc(Departuce, searchD) == 1) return true;
+
+    return false
 }
