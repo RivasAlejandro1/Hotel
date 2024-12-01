@@ -24,8 +24,8 @@ export function validateBirthdate(infoDate){
     const date = new Date(infoDate);
     const current = new Date();
     const oldMayor = new Date(`${current.getFullYear-18}-${current.getMonth()}-${current.getDate()}`);
-    if( compareAsc(date, new Date()) == 1 ) throw new Error(`La fecha no puede ser posterior a hoy`);
-    if( compareAsc(date, oldMayor) == 1) throw new Error(`La persona que se registra debe ser mayor de edad`);
+    if( compareAsc(date, new Date()) == 1 ) throw new Error(`La fecha no puede ser posterior al día de hoy`);
+    if( compareAsc(date, oldMayor) == 1) throw new Error(`Debes ser mayor de edad`);
 
 }   
 
