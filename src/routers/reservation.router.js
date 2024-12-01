@@ -5,6 +5,6 @@ const reservationRouter = Router();
 reservationRouter.get("/", getAllReservationsController);
 reservationRouter.get("/search", searchAvailableReservartionController);
 reservationRouter.get("/searchspecific", searchSpecificAvailableRoomController);
-//reservationRouter.post("/", makeAReservationController);
+reservationRouter.post("/", makeAReservationController);
 
 export default reservationRouter;   

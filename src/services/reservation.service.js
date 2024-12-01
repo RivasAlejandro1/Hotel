@@ -166,19 +166,19 @@ export const reservationSeederService = async (users, rooms)=> {
 
 export const makeAReservationService = async ({userId, roomId, entryDate, departureDate}) => {
     
-    const userExist = await userRepository.findOneBy({id:userId});
-    const roomExist = await roomRepository.findOneBy({id:roomId});
+    const userFinded = await userRepository.findOneBy({id:userId});
+    const roomFinded = await roomRepository.findOneBy({id:roomId});
 
-    if(!userExist) throw new Error(`El usuario con el id ${userId} no exite`);
-    if(!roomExist) throw new Error(`La habitación con el id ${roomId} no exite`);
+    if(!userFinded) throw new Error(`El usuario con el id ${userId} no exite`);
+    if(!roomFinded) throw new Error(`La habitación con el id ${roomId} no exite`);
     
-    
-    const newReservation = {
-        userId,
-        roomId,
-        entryDate,
-        departureDate
-    };
+    const newReservation = reservationRepository.create({
+            user: userFinded,
+            room: roomFinded,
+            entryDate,
+            departureDate,
+            paid: false
+    });
     
     await reservationRepository.save(newReservation);
     
