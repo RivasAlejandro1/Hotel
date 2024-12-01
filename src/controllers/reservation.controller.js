@@ -1,4 +1,4 @@
-import { getAllReservationsService, searchAvailableReservartionService } from "../services/reservation.service.js";
+import { getAllReservationsService, makeAReservationService, searchAvailableReservartionService, searchSpecificAvailableRoomService } from "../services/reservation.service.js";
 
 export const getAllReservationsController =  async (req, res) =>{
     try{
@@ -22,4 +22,40 @@ export const searchAvailableReservartionController =  async (req, res) =>{
     }
 
 }
+
+export const searchSpecificAvailableRoomController =  async (req, res) =>{
+    try{
+        const {entryDate, departureDate, type, price, equal } = req.body;
+        const info = {
+            entryDate, 
+            departureDate,
+             type,
+            price,
+            equal
+        };
+        const allReservation = await searchSpecificAvailableRoomService(info);
+        res.status(200).send(allReservation);
+    }
+    catch(error){
+        res.status(404).send(error.message);
+    }
+
+}
+
+export const makeAReservationController = async (req, res) =>{
+    try{
+        const  { entryDate, departureDate, roomId, userId} = req.body;
+        const result =  await makeAReservationService({
+            entryDate, 
+            departureDate,
+            roomId,
+            userId
+        })
+        res.status(200).send(result);
+    }
+    catch(error){
+        res.status(400).send(error.message);
+    }
+}
+
 

@@ -22,8 +22,7 @@ export default new EntitySchema({
     relations:{
         room:{
             target: "Room",
-            type: "many-to-one",
-            
+            type: "many-to-one",   
         },
         user: {
             target: "User",
