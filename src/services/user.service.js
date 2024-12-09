@@ -1,3 +1,4 @@
+import { arrayBuffer } from "node:stream/consumers";
 import { AppDataSource } from "../config/AppDataSource.js";
 import User from "../entities/user.entity.js";
 import infoUsers from "../utils/infoUsers.js";
@@ -6,12 +7,39 @@ const userReposository = AppDataSource.getRepository(User);
 
 export const getAllUserService = async ()=> {
     const allUser = await userReposository.find();
-    return allUser;
+    const withoutPasswordAllUser =  allUser.map((user) =>{
+        const {password, ...withoutPasswordUser}   = user;
+        return withoutPasswordUser
+    })
+    return withoutPasswordAllUser;
 };
 
 export const getUserByIDService = async (id)=> {
     const userFinded = await userReposository.findOneBy({id: id});
-    return userFinded;
+    const {password, ...withoutPasswordUser } = userFinded;
+    return withoutPasswordUser;
+};
+
+export const getSpecificUsersService = async (info)=> {
+    
+    const searchInfo = {}
+
+    if(info.cedula) searchInfo.cedula = info.cedula;
+    if(info.name) searchInfo.name = info.name;
+    if(info.lastName) searchInfo.lastName = info.lastName;
+    if(info.birthdate) searchInfo.birthdate = info.birthdate;
+    if(info.administrador) searchInfo.administrador = info.administrador;
+    
+    
+    const allUser = await userReposository.find({
+        where: searchInfo
+    });
+
+    const withoutPasswordAllUser =  allUser.map((user) =>{
+        const {password, ...withoutPasswordUser}   = user;
+        return withoutPasswordUser;
+    })
+    return withoutPasswordAllUser;
 };
 
 

@@ -1,4 +1,4 @@
-import { /* createUserService, */ getAllUserService, getUserByIDService, modifeUserRolService, modifeUserService } from "../services/user.service.js";
+import { /* createUserService, */ getAllUserService, getSpecificUsersService, getUserByIDService, modifeUserRolService, modifeUserService } from "../services/user.service.js";
 
 
 export const getAllUserController =  async (req, res)=>{
@@ -17,6 +17,38 @@ export const getUserByIdController =  async (req, res)=>{
         const userFinded =  await getUserByIDService(req.params.id);
         if(userFinded == null) throw new Error(`Usuario con el id ${req.params.id} no existe.`)
         res.status(200).send(userFinded);
+    }
+    catch(error){
+        res.status(404).send(
+            {
+                error: error.message
+            });
+    }
+
+} 
+export const getSpecificUsersController =  async (req, res)=>{
+    try{
+        const { 
+            cedula, 
+            name, 
+            lastName, 
+            birthdate, 
+            administrador
+        } = req.body;
+        
+        
+        const info =  { 
+            cedula, 
+            name, 
+            lastName, 
+            birthdate, 
+            administrador
+        };
+
+
+
+        const findedUsers =  await getSpecificUsersService(info);
+        res.status(200).send(findedUsers);
     }
     catch(error){
         res.status(404).send(

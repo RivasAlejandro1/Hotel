@@ -1,9 +1,12 @@
 import { Router } from 'express';
-import { /* createUserController, */ getAllUserController, getUserByIdController, modifeRolUserController, modifeUserController } from '../controllers/user.controller.js';
+import { /* createUserController, */ getAllUserController, getSpecificUsersController, getUserByIdController, modifeRolUserController, modifeUserController } from '../controllers/user.controller.js';
 import {/* validateUser, */ validateName, validateBirthdate,  validateCedula} from '../validations/createUserValidation.js';
 const userRouter = Router();
 
 userRouter.get("/", getAllUserController);
+userRouter.get("/specifc", getSpecificUsersController);
+
+
 
 userRouter.put("/rol/:id", modifeRolUserController);
 userRouter.get("/:id", (req, res, next)=>{
@@ -54,6 +57,18 @@ userRouter.put("/:id", (req, res, next) =>{
     
 });
 userRouter.put("/:id", modifeUserController);
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* userRouter.post("/", (req, res, next)=>{
     
