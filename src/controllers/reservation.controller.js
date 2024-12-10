@@ -1,6 +1,7 @@
 import { 
     getAllInfoRoomsService, 
     getAllReservationsService, 
+    getSpecificReservationService, 
     makeAReservationService, 
     searchAvailableReservartionService, 
     searchSpecificAvailableRoomService 
@@ -64,6 +65,21 @@ export const makeAReservationController = async (req, res) =>{
     }
 }
 
+
+
+export const getSpecificReservationController = async (req, res) =>{
+    try{
+        const findedReservations =  await getSpecificReservationService(req.body);
+        res.status(200).send(findedReservations);
+    }
+    catch(error){
+        res.status(404).send(
+            {
+                error: error.message
+            });
+    }
+}
+
 export const getAllInfoRoomsController = async (req, res) =>{
     try{
         const  { entryDate, departureDate} = req.body;
@@ -77,5 +93,7 @@ export const getAllInfoRoomsController = async (req, res) =>{
         res.status(400).send(error.message);
     }
 }
+
+
 
 

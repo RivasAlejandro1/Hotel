@@ -216,7 +216,17 @@ export const getAllInfoRoomsService = async({ entryDate, departureDate}) => {
 
 
 
-
+export const getSpecificReservationService = async (searchInfo)=> {
+    
+    const allReservations = await reservationRepository.find({
+        where: searchInfo,
+        relations: {
+            user: true,
+            room: true
+        }
+    });
+    return allReservations;
+};
 
 
 
