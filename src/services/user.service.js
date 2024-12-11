@@ -38,7 +38,7 @@ export const getSpecificUsersService = async (info)=> {
     const withoutPasswordAllUser =  allUser.map((user) =>{
         const {password, ...withoutPasswordUser}   = user;
         return withoutPasswordUser;
-    })
+    });
     return withoutPasswordAllUser;
 };
 
@@ -47,10 +47,6 @@ export const getSpecificUsersService = async (info)=> {
 export const modifeUserRolService = async(id/* , rol */) =>{
     const userFinded = await userReposository.findOneBy({id});
     if(!userFinded) throw new Error(`El usuario con el id ${id} no existe`);
-    /* const result = await userReposository.update(
-        {id},
-        {rol}
-    ); */
 
     const result = await userReposository.update(
         {id},

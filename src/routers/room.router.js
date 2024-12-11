@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { createRoomController, getAllRoomsController } from "../controllers/room.controller.js";
 import { validatePrice, validateRoomNumber, validateRoomType } from "../validations/createRoomValidation.js";
-import userTokenMiddleware from "../middlewares/userToken.middleware.js";
+import checkToken from "../middlewares/checkToken.middleware.js";
 
 const roomRouter = Router();
 roomRouter.get("/", getAllRoomsController);
@@ -20,6 +20,6 @@ roomRouter.post("/", (req, res, next) =>{
     }
    
 });
-roomRouter.post("/", userTokenMiddleware, createRoomController);
+roomRouter.post("/", checkToken, createRoomController);
 
 export default roomRouter;

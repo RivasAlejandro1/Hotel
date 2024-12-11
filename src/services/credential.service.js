@@ -2,7 +2,7 @@ import credentialEntity from "../entities/credential.entity.js";
 import { AppDataSource } from "../config/AppDataSource.js";
 import bcrypt from 'bcrypt';
 import infoCrenditials from "../utils/infoCredenitials.js";
-import { genereteAccessToken } from "./auth.service.js";
+import { genereteAccessToken } from "../helpers/jwt/generateToken.js";
 const credentialRepository = AppDataSource.getRepository(credentialEntity);
 
 
@@ -11,12 +11,24 @@ export const loginCredentialService = async (email, password) =>{
         throw new Error(`El email o las contraseñas son invalidas`);
     }
     
-    const credentialFinded = await credentialRepository.findOne({where: {email}});
+    const credentialFinded = await credentialRepository.findOne({
+        where: {
+            email
+        },
+        relations:{
+            user: true
+        }
+    });
+
     if(!credentialFinded) ErrorInvalidCredentials();
     const validPassword = await bcrypt.compare(password, credentialFinded.password);
     if(!validPassword) ErrorInvalidCredentials();
+
     
-    const accesstoken = genereteAccessToken(email);
+    const  { user } = credentialFinded;
+    const  { id, administrador} = user;
+    
+    const accesstoken = genereteAccessToken({id, administrador});
     
     return accesstoken;
 }

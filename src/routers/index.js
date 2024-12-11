@@ -3,7 +3,7 @@ import userRouter from './user.router.js';
 import credentialRouter from './credential.router.js';
 import reservationRouter from './reservation.router.js';
 import roomRouter from './room.router.js';
-import { deleteTokenCookie } from '../services/auth.service.js';
+import { deleteTokenCookie } from '../helpers/jwt/deleteTokenCookie.js';
 
 const router = Router();
 
