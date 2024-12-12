@@ -17,14 +17,6 @@ export const createRoomService = async (room)=> {
     return roomFinded;
 };
 
-/* export const searchSpecificRoomsService = async(roomInfo) =>{
-    
-    const allRoomsFinded = await roomRepository.find({
-        where: roomInfo
-    })
-} */
-
-
 
 export const roomSeederService = async ()=> {
     await Promise.all(
