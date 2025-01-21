@@ -29,8 +29,13 @@ export const loginCredentialService = async (email, password) =>{
     const  { id, administrador} = user;
     
     const accesstoken = genereteAccessToken({id, administrador});
+    console.log(accesstoken)
     
-    return accesstoken;
+    return {
+        accesstoken,
+        id: id,
+        administrador
+    };
 }
 
 
