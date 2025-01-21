@@ -1,8 +1,10 @@
 import { 
+    deleteReservationService,
     getAllInfoRoomsService, 
     getAllReservationsService, 
     getSpecificReservationService, 
     makeAReservationService, 
+    modifeReservationService, 
     searchAvailableReservartionService, 
     searchSpecificAvailableRoomService 
 } from "../services/reservation.service.js";
@@ -32,7 +34,9 @@ export const getSpecificReservationController = async (req, res) =>{
 
 export const getAllInfoRoomsController = async (req, res) =>{
     try{
+
         const  { entryDate, departureDate} = req.body;
+        console.log("This is the body:", { entryDate, departureDate})
         const result =  await getAllInfoRoomsService({
             entryDate, 
             departureDate
@@ -90,6 +94,41 @@ export const makeAReservationController = async (req, res) =>{
         res.status(400).send(error.message);
     }
 }
+
+
+export const deleteReservationController = async (req, res) =>{
+    try{
+        const {id} = req.params;
+        const result =  await deleteReservationService(id);
+        res.status(200).send(result);
+    }
+    catch(error){
+        res.status(400).send(error.message);
+    }
+}
+export const modifeReservationController = async (req, res) =>{
+    try{
+        const {id} = req.params;
+        const {entryDate, departureDate, roomId, paid} = req.body;
+        const changesReservation = {};
+
+        if(entryDate) changesReservation.entryDate = entryDate;
+        if(departureDate) changesReservation.departureDate = departureDate;
+        if(roomId) changesReservation.roomId = roomId;
+        if(paid) changesReservation.paid = paid;
+
+
+        const result =  await modifeReservationService(id, changesReservation);
+        res.status(200).send(result);
+    }
+    catch(error){
+        res.status(400).send(error.message);
+    }
+}
+
+
+
+
 
 
 

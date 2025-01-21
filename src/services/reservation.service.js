@@ -12,7 +12,9 @@ const userRepository = AppDataSource.getRepository(userEntity);
 
 
 export const getAllReservationsService =  async () =>{
-    const allReservations = await reservationRepository.find();
+    const allReservations = await reservationRepository.find({
+        relations:["user", "room"]
+    });
     return allReservations;
 }
 
@@ -201,12 +203,16 @@ export const getAllInfoRoomsService = async({ entryDate, departureDate}) => {
     
    
     for(const reservation of findedReservations){
-      console.log(reservation);
         if(existeChoqueConElIntervalo(entryDate, departureDate, reservation.entryDate, reservation.departureDate)){
             allUnavailableRooms.push(reservation.room);
             allAvailableRooms = allAvailableRooms.filter((room) => room.id != reservation.room?.id);
         }
     }
+
+    console.log([
+        allAvailableRooms,
+        allUnavailableRooms
+    ])
 
     return  [
         allAvailableRooms,
@@ -228,8 +234,36 @@ export const getSpecificReservationService = async (searchInfo)=> {
     return allReservations;
 };
 
+export const deleteReservationService = async (id)=> {
+    await reservationRepository.delete({
+            id
+    })
+    return `¡La reservación con el id ${id} fue eliminada con exito!`
+}
 
 
+export const modifeReservationService = async(id, changes)=> {
+    
+    const existReservation = await reservationRepository.existsBy({id});
+    if(!existReservation) throw new Error(`La Reservación con el id ${id} no existe`);
+    const { roomId, ...AllChangues} = changes;
+    if(changes.roomId) {
+        const existRoom = await roomRepository.findOneBy({id});
+        if(!existReservation) throw new Error(`La Habitación con el id ${id} no existe`);
+        AllChangues.room = roomId;
+        console.log("LOOK:")
+    }
+    
+    console.log("AllChangues: ", AllChangues)
+
+
+    await reservationRepository.update(   
+        {id},
+        AllChangues
+    )
+    return "La reservación se ha cambiado correctamente"
+
+}
 
 
 const existeChoqueConElIntervalo = (entryDate, departureDate, reservationEntryDate, reservationDepartureDate) =>{

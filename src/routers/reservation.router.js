@@ -4,7 +4,9 @@ import { getAllInfoRoomsController,
     getSpecificReservationController, 
     makeAReservationController, 
     searchAvailableReservartionController, 
-    searchSpecificAvailableRoomController 
+    searchSpecificAvailableRoomController,
+    deleteReservationController,
+    modifeReservationController
 } from "../controllers/reservation.controller.js";
 import cleanBodySpecificReservation from "../middlewares/specificReservation.middleware.js";
 import checkToken from "../middlewares/checkToken.middleware.js";
@@ -15,7 +17,9 @@ reservationRouter.get("/", checkToken, checkRoleAuth([true]), getAllReservations
 reservationRouter.get("/specific" , checkToken, checkRoleAuth([true]), cleanBodySpecificReservation, getSpecificReservationController);
 reservationRouter.get("/search" , checkToken, checkRoleAuth([true]), searchAvailableReservartionController);
 reservationRouter.get("/searchspecific" , checkToken, checkRoleAuth([true]), searchSpecificAvailableRoomController);
-reservationRouter.get("/info" , checkToken, checkRoleAuth([true]), getAllInfoRoomsController);
+reservationRouter.post("/info" , checkToken, checkRoleAuth([true]), getAllInfoRoomsController);
 reservationRouter.post("/", checkToken, makeAReservationController);
+reservationRouter.delete("/:id", checkToken, checkRoleAuth([true]), deleteReservationController);
+reservationRouter.put("/:id", checkToken, checkRoleAuth([true]), modifeReservationController);
 
 export default reservationRouter;   
