@@ -7,8 +7,7 @@ import { verifyToken } from '../helpers/jwt/verifyToken.js';
     if(tokenData?.id){
         next();
     }else {
-        res.status(409)
-        res.send({
+        res.status(409).send({
             error: "Token invalido"
         })
     }
