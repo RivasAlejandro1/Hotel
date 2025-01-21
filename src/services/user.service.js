@@ -1,17 +1,29 @@
-import { arrayBuffer } from "node:stream/consumers";
+import credentialEntity from "../entities/credential.entity.js";
 import { AppDataSource } from "../config/AppDataSource.js";
 import User from "../entities/user.entity.js";
 import infoUsers from "../utils/infoUsers.js";
 
 const userReposository = AppDataSource.getRepository(User);
+const credentialReposository = AppDataSource.getRepository(credentialEntity);
 
 export const getAllUserService = async ()=> {
-    const allUser = await userReposository.find();
-    const withoutPasswordAllUser =  allUser.map((user) =>{
+    const allCredentials = await credentialReposository.find({
+        relations: ["user"]
+    });
+    const allUsers = allCredentials.map( (credential) => {
+        const {email, user} = credential;
+        return {
+            email,
+            ...user
+        }
+    }) 
+
+
+  /*   const withoutPasswordAllUser =  allUser.map((user) =>{
         const {password, ...withoutPasswordUser}   = user;
         return withoutPasswordUser
-    })
-    return withoutPasswordAllUser;
+    }) */
+    return allUsers;
 };
 
 export const getUserByIDService = async (id)=> {
