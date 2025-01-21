@@ -1,20 +1,20 @@
 const infoCrenditials = [
     {
         email: "pedro.perez@example.com",
-        password: "password123",
-        confirmPassword: "password123",
+        password: "Password123*",
+        confirmPassword: "Password123*",
         user: {
         name: "Pedro",
         lastName: "Martinez",
         birthdate: "1990-05-15",
         cedula: 1234567890,
-        administrador: false
+        administrador: true
         }
     },
     {
         email: "maria.gomez@example.com",
-        password: "securePass456",
-        confirmPassword: "securePass456",
+        password: "securePass456*",
+        confirmPassword: "securePass456*",
         user: {
             name: "Maria",
             lastName: "Gomez",
@@ -25,8 +25,8 @@ const infoCrenditials = [
     },
     {
         email: "jose.lopez@example.com",
-        password: "josePass789",
-        confirmPassword: "josePass789",
+        password: "josePass789*",
+        confirmPassword: "josePass789*",
         user: {
             name: "Jose",
             lastName: "Lopez",
@@ -37,8 +37,8 @@ const infoCrenditials = [
     },
     {
         email: "ana.martinez@example.com",
-        password: "ana12345",
-        confirmPassword: "ana12345",
+        password: "Ana12345*",
+        confirmPassword: "Ana12345*",
         user: {
             name: "Ana",
             lastName: "Martinez",
@@ -49,8 +49,8 @@ const infoCrenditials = [
     },
     {
         email: "luis.sanchez@example.com",
-        password: "luisSecure234",
-        confirmPassword: "luisSecure234",
+        password: "luisSecure234*",
+        confirmPassword: "luisSecure234*",
         user: {
             name: "Luis",
             lastName: "Sanchez",
