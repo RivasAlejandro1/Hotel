@@ -18,6 +18,19 @@ export const getAllReservationsService =  async () =>{
     return allReservations;
 }
 
+export const getAllReservationByUserService =  async (id) =>{
+    const allReservations = await reservationRepository.find({
+        relations:["user", "room"],
+        where: {
+            user: {
+                id
+            },
+        }
+    });
+    return allReservations;
+}
+
+
 export const searchSpecificAvailableRoomService = async(info) =>{
     
     const {entryDate, departureDate, price, equal, type} = info;

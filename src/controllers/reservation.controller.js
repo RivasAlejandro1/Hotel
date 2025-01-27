@@ -1,6 +1,7 @@
 import { 
     deleteReservationService,
     getAllInfoRoomsService, 
+    getAllReservationByUserService, 
     getAllReservationsService, 
     getSpecificReservationService, 
     makeAReservationService, 
@@ -119,6 +120,16 @@ export const modifeReservationController = async (req, res) =>{
 
 
         const result =  await modifeReservationService(id, changesReservation);
+        res.status(200).send(result);
+    }
+    catch(error){
+        res.status(400).send(error.message);
+    }
+}
+export const getAllReservationByUserController = async (req, res) =>{
+    try{
+        const {id} = req.params;
+        const result =  await getAllReservationByUserService(id);
         res.status(200).send(result);
     }
     catch(error){
